@@ -2,7 +2,7 @@
 `Convert To Arrow` 는 JavaScript와 TypeScript의 named function을 arrow function으로 바로 변환해주는 VSCode 익스텐션입니다.
 
 ## 기능
-- 명명된 함수를 화살표 함수로 변환
+- 이름이 있는 함수(Named Function)를 화살표 함수(Arrow Function)로 변환
 - 함수 이름 위에서 명령을 실행할 경우 해당 함수 블록을 자동으로 인식
 - 함수 이름 위에서 Cmd + Enter 입력시 추천 명령에 나타남
 
