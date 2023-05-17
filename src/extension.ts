@@ -5,8 +5,6 @@ export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "function-to-arrow" is now active!');
 
   let disposable = vscode.commands.registerCommand("hismethod.function-to-arrow", () => {
-    vscode.window.showInformationMessage("Hello World from FunctionToArrow!");
-
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
       return;

@@ -2,7 +2,7 @@
   "name": "function-to-arrow",
   "displayName": "FunctionToArrow",
   "description": "FunctionToArrow is a handy VSCode extension that allows developers to quickly convert JavaScript and TypeScript named functions into arrow functions. Simply highlight the named function in your code and execute the 'FunctionToArrow' command from the command palette to transform it into an arrow function.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.78.0"
   },
