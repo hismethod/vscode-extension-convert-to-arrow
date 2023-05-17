@@ -1,71 +1,28 @@
-# function-to-arrow README
+# FunctionToArrow
+`FunctionToArrow`는 JavaScript와 TypeScript의 named function을 arrow function으로 바로 변환해주는 VSCode 익스텐션입니다.
 
-This is the README for your extension "function-to-arrow". After writing up a brief description, we recommend including the following sections.
+## 사용 방법
+VSCode 에디터에서 named function을 선택합니다.
+Command Palette (Ctrl+Shift+P 또는 Cmd+Shift+P on macOS)를 열고 `FunctionToArrow` 명령을 실행합니다.
+선택한 named function이 arrow function으로 변환됩니다.
 
-## Features
+## 예시
+예를 들어, 다음과 같은 named function을 선택한 상태에서 `FunctionToArrow` 명령을 실행하면,
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+```typescript
+function test(arg1, arg2) {
+  return arg1 + arg2;
+}
+```
+아래와 같이 arrow function으로 변환됩니다.
 
-For example if there is an image subfolder under your extension project workspace:
+```typescript
+const test = (arg1, arg2) => {
+  return arg1 + arg2;
+}
+```
+## 설치
+VSCode Marketplace에서 'FunctionToArrow'을 검색하거나 이 링크를 통해 설치할 수 있습니다.
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+## 문제점 제보
+문제점이나 개선사항이 있으시다면, GitHub 이슈 트래커를 통해 제보해주세요.
