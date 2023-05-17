@@ -4,7 +4,7 @@ import { convertFunction } from "./util";
 export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "function-to-arrow" is now active!');
 
-  let disposable = vscode.commands.registerCommand("extension.function-to-arrow", () => {
+  let disposable = vscode.commands.registerCommand("hismethod.function-to-arrow", () => {
     vscode.window.showInformationMessage("Hello World from FunctionToArrow!");
 
     const editor = vscode.window.activeTextEditor;

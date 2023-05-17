@@ -14,7 +14,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.function-to-arrow",
+        "command": "hismethod.function-to-arrow",
         "title": "Convert Named Function to Arrow Function"
       }
     ]
