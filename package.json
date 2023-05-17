@@ -1,7 +1,7 @@
 {
   "name": "convert-to-arrow",
   "displayName": "Convert To Arrow Function",
-  "description": "Convert To Arrow is a handy VSCode extension that allows developers to quickly convert JavaScript and TypeScript named functions into arrow functions. Simply highlight the named function in your code and execute the 'ConvertToArrow' command from the command palette to transform it into an arrow function.",
+  "description": "Convert To Arrow provides a convenient way to convert named functions to arrow functions in JavaScript and TypeScript.",
   "version": "1.0.3",
   "engines": {
     "vscode": "^1.78.0"
