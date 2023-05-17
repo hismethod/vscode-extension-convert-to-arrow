@@ -22,7 +22,7 @@ const test = (arg1, arg2) => {
 }
 ```
 ## 설치
-VSCode Marketplace에서 'FunctionToArrow'을 검색하거나 이 링크를 통해 설치할 수 있습니다.
+VSCode Marketplace에서 'FunctionToArrow'을 검색하거나 이 [링크](https://marketplace.visualstudio.com/items?itemName=hismethod.function-to-arrow)를 통해 설치할 수 있습니다.
 
 ## 문제점 제보
 문제점이나 개선사항이 있으시다면, GitHub 이슈 트래커를 통해 제보해주세요.
