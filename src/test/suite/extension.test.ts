@@ -12,4 +12,11 @@ suite("Extension Test Suite", () => {
     const result = convertNamedToArrowFunction(namedFunction);
     assert.equal(result, expectedArrowFunction);
   });
+
+  test("convertNamedToArrowFunction should correctly convert async functions", () => {
+    const asyncFunctionText = "async function myFunction(a, b, c) {\n  // Implementation\n}";
+    const expectedArrowFunction = "const myFunction = async (a, b, c) => {\n  // Implementation\n}";
+    const result = convertNamedToArrowFunction(asyncFunctionText);
+    assert.strictEqual(result, expectedArrowFunction);
+  });
 });
