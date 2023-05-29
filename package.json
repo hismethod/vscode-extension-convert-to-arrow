@@ -1,15 +1,14 @@
 {
   "name": "convert-to-arrow",
   "displayName": "Convert To Arrow Function",
-  "description": "Convert To Arrow provides a convenient way to convert named functions to arrow functions in JavaScript and TypeScript.",
-  "version": "1.0.4",
+  "description": "Convert To Arrow provides a convenient way to convert named functions to arrow functions in js/ts or jsx/tsx.",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.78.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./dist/extension.js",
   "icon": "images/icon.png",
   "publisher": "hismethod",
@@ -17,13 +16,28 @@
     "type": "git",
     "url": "https://github.com/hismethod/vscode-extension-convert-to-arrow"
   },
+  "bugs": {
+    "url": "https://github.com/hismethod/vscode-extension-convert-to-arrow/issues"
+  },
   "contributes": {
     "commands": [
       {
-        "command": "hismethod.convertToArrow",
-        "title": "Convert Named Function to Arrow Function for JavaScript/TypeScript"
+        "title": "%convert.to.arrow.function%",
+        "command": "extension.convertToArrowFunction"
+      },
+      {
+        "title": "%convert.selection.to.arrow.function%",
+        "command": "extension.convertSelectionToArrowFunction"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.convertSelectionToArrowFunction",
+          "group": "1_modification"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
@@ -37,19 +51,27 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.78.0",
+    "@babel/types": "^7.21.5",
+    "@types/babel__generator": "^7.6.4",
+    "@types/babel__traverse": "^7.18.5",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
+    "@types/vscode": "^1.78.0",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
+    "@vscode/test-electron": "^2.3.0",
     "eslint": "^8.39.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
-    "typescript": "^5.0.4",
     "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
     "webpack": "^5.81.0",
-    "webpack-cli": "^5.0.2",
-    "@vscode/test-electron": "^2.3.0"
+    "webpack-cli": "^5.0.2"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.21.5",
+    "@babel/parser": "^7.21.8",
+    "@babel/traverse": "^7.21.5"
   }
 }

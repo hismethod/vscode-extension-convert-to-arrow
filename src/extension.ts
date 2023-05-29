@@ -1,69 +1,57 @@
 import * as vscode from "vscode";
-import { convertNamedToArrowFunction } from "./util";
+import { convertNamedToArrowFunction, getFunctionRange } from "./util";
+import { ConvertToArrowCodeAction } from "./arrowizer";
 
-const fileTypesToApply = [
-  { scheme: "file", language: "javascript" },
-  { scheme: "file", language: "typescript" },
-];
+const fileTypesToApply = [{ language: "javascript" }, { language: "typescript" }, { language: "javascriptreact" }, { language: "typescriptreact" }];
 export function activate(context: vscode.ExtensionContext) {
-  context.subscriptions.push(vscode.commands.registerCommand("hismethod.convertToArrow", convertFunction));
+  context.subscriptions.push(vscode.commands.registerCommand("extension.convertSelectionToArrowFunction", convertSelectionToArrowFunction));
+  context.subscriptions.push(vscode.commands.registerCommand("extension.convertToArrowFunction", convertFunction));
+  context.subscriptions.push(vscode.languages.registerCodeActionsProvider(fileTypesToApply, new ConvertToArrowCodeAction()));
+}
 
-  context.subscriptions.push(
-    vscode.languages.registerCodeActionsProvider(fileTypesToApply, {
-      provideCodeActions: (document, range, context, token) => {
-        const functionRange = getFunctionRange(document, range);
-        if (!functionRange) {
-          return; // No function found
-        }
+async function convertSelectionToArrowFunction() {
+  const activeEditor = vscode.window.activeTextEditor;
 
-        const action = new vscode.CodeAction("Convert to arrow function", vscode.CodeActionKind.RefactorRewrite);
-        action.command = { command: "hismethod.convertToArrow", title: "Convert to Arrow Function" };
-        action.isPreferred = true;
-
-        return [action];
-      },
-    })
-  );
-
-  function getFunctionRange(document: vscode.TextDocument, range: vscode.Range): vscode.Range | undefined {
-    const functionPattern = /(async\s*)?function(\s+\w+)?\s*\((.*?)\)/g;
-    const text = document.getText();
-    let match;
-
-    while ((match = functionPattern.exec(text))) {
-      const start = document.positionAt(match.index);
-      const end = document.positionAt(match.index + match[0].length);
-
-      if (range.intersection(new vscode.Range(start, end))) {
-        return new vscode.Range(start, end);
-      }
-    }
-
-    return undefined; // No function found
+  if (!activeEditor) {
+    vscode.window.showInformationMessage("No active editor found");
+    return;
   }
 
-  function convertFunction() {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) {
-      return; // No active editor
-    }
+  const document = activeEditor.document;
+  const selection = activeEditor.selection;
 
-    const document = editor.document;
-    const selection = editor.selection;
+  await convertFunction(document.uri, selection);
+}
 
-    // Convert the selected function to an arrow function
-    const text = document.getText(selection);
-    const arrowFunctionText = convertNamedToArrowFunction(text);
+async function convertFunction(uri: vscode.Uri, functionRange: vscode.Range) {
+  let document;
+  if (!uri) {
+    const activeEditor = vscode.window.activeTextEditor;
 
-    if (!arrowFunctionText) {
-      vscode.window.showInformationMessage("No Named funtion found to convert");
+    if (!activeEditor) {
+      vscode.window.showInformationMessage("No active editor found");
       return;
     }
 
-    editor.edit((editBuilder) => {
-      editBuilder.replace(selection, arrowFunctionText);
-    });
+    document = activeEditor.document;
+    uri = document.uri;
+    functionRange = getFunctionRange(document, activeEditor.selection) ?? activeEditor.selection;
+  } else {
+    document = await vscode.workspace.openTextDocument(uri);
   }
+
+  const functionText = document.getText(functionRange);
+  console.log("range: " + JSON.stringify(functionRange));
+  console.log("text : " + functionText);
+  const arrowFunctionText = convertNamedToArrowFunction(functionText);
+  if (!arrowFunctionText) {
+    vscode.window.showInformationMessage("No Named funtion found to convert");
+    return;
+  }
+
+  const edit = new vscode.WorkspaceEdit();
+  edit.replace(uri, functionRange, arrowFunctionText);
+  return vscode.workspace.applyEdit(edit);
 }
 
 export function deactivate() {}
