@@ -12,6 +12,12 @@
   "main": "./dist/extension.js",
   "icon": "images/icon.png",
   "publisher": "hismethod",
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/hismethod/vscode-extension-convert-to-arrow"
